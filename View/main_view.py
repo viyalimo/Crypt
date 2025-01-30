@@ -5,7 +5,7 @@ from back.Podpis import FileWithSignatureAndPublicKey
 from back.AES import AES
 from flet_route import Params, Basket
 import concurrent.futures
-from back.Game import SnakeGame
+
 
 
 class MainPage(AES, FileWithSignatureAndPublicKey):
@@ -14,8 +14,7 @@ class MainPage(AES, FileWithSignatureAndPublicKey):
 
     def view(self, page: Page, params: Params, basket: Basket):
 
-        content_container = Column(controls=[Row(controls=[Text("Начать")], alignment=MainAxisAlignment.CENTER)],
-                                   alignment=MainAxisAlignment.CENTER, expand=True)
+        content_container = Column(controls=[], alignment=MainAxisAlignment.CENTER, expand=True)
 
         def on_navigation_change(index):
             if index == 0:
@@ -30,12 +29,8 @@ class MainPage(AES, FileWithSignatureAndPublicKey):
                 check_podpic()
             elif index == 5:
                 style_revert()
-            elif index == 6:
-                start_game()
 
-        def start_game():
-            content_container.controls.clear()
-            SnakeGame(content_container)
+
 
         def shifr_next_password(path):
             content_container.controls.clear()
@@ -780,11 +775,7 @@ class MainPage(AES, FileWithSignatureAndPublicKey):
                 NavigationBarDestination(icon=icons.DOWNLOAD_DONE, label="Цифровая подпись"),
                 NavigationBarDestination(icon=icons.DOCUMENT_SCANNER, label="Проверить подлинность"),
                 NavigationBarDestination(icon=Icons.DARK_MODE_OUTLINED, label="Стиль приложения"),
-                NavigationBarDestination(icon=Icons.GAMEPAD,
-                                         label="Играть",
-                                         disabled=True,
-                                         visible=False
-                                         ),
+
             ],
             selected_index=0,
             on_change=lambda e: on_navigation_change(e.control.selected_index),
